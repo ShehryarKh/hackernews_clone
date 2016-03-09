@@ -17,4 +17,4 @@ class Posts(models.Model):
 		self.updated_at = timezone.now()
 		if not self.id:
 			self.created_at = timezone.now()
-			super(Posts, self).save(*args, **kwargs)
+		return super().save(*args, **kwargs)

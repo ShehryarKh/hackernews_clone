@@ -64,3 +64,12 @@ class Edit(View):
 			return render(request,self.template, context)
 
 
+class Delete(View):
+	def get(self,request,slug):
+		news = get_object_or_404(Posts,slug=slug)
+		news.Delete()
+		return redirect("index")
+
+
+
+
