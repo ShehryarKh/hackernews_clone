@@ -1,16 +1,49 @@
 from django.shortcuts import render,redirect
 from django.views.generic import View 
-from .forms import PostForm
+from .forms import PostForm,UserForm
+from django.contrib.auth import authenticate, login
 from .models import Posts
 from django.shortcuts import get_object_or_404
 
 # Create your views here.
+class Register(View):
+	template = "register.html"
+	def get(self,request):
+		register = False
+
+		if request.user.is_authenticated():
+			return redirect("index")
+		userform = UserForm()
+		context={
+			"userform":userform
+			}
+		return render(request,self.template,context)
+
+
+
+	def post(self,request):
+
+		userform = UserForm(data=request.POST)
+		if userform.is_valid():
+			user = userform.save()
+			return redirect("index")
+		else:
+			context={
+			"userform":userform
+			}
+			return render(request,self.template,context)
+
+class Login(View):
+
+
+
+
+
 class Index(View):
 	template = "index.html"
 
 	def get(self,request):
 		posts = Posts.objects.all()
-		print(posts)
 		context= {
 			"posts": posts
 		}
@@ -65,9 +98,9 @@ class Edit(View):
 
 
 class Delete(View):
-	def get(self,request,slug):
+	def post(self,request,slug):
 		news = get_object_or_404(Posts,slug=slug)
-		news.Delete()
+		news.delete()
 		return redirect("index")
 
 

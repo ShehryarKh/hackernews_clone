@@ -9,4 +9,12 @@
 
 </form>
 
+<form action="{% url 'home:delete' slug=Posts.slug %}" method="POST">
+        {% csrf_token %}
+
+
+        <input id = "delete" type="submit" class ="deletebutton" value="Delete">
+    </form>
+
+
 {% endblock %}
