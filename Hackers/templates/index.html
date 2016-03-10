@@ -1,19 +1,49 @@
 {% extends "base.html" %}
 
 {% block content %}
+<div class="createform">
 
-	<a href="{% url 'home:create'%}"> create</a>
-		<a href="{% url 'home:register'%}"> register</a>
+		<form id="createform" method="post" action="{% url 'home:create' %}">
+				{% csrf_token %}
+
+            title: <input type="text" name="title" value="" id="title" size="50" />
+            <br />
+            content: <textarea cols="40" id="content" value="" name="content" rows="10" ></textarea>
+            <br />
+
+            <input id="creatsubmit" type="submit" value="submit" />
+        </form>
+	
+</div>
 
 
+<div class = "container small-6 large-4 columns"> 
+
+	<a id= "nav" href="{% url 'home:create'%}"> create</a>
+		<a id= "nav" id="registerbutton" href="{% url 'home:register'%}"> register</a>
+		<a id= "nav" href="{% url 'home:login'%}"> login</a>
+		<a id= "nav" href="{% url 'home:logout'%}"> logout</a>
+
+
+
+<div id ="allposts">
 	{% for post in posts %}
 
 	<div class = "row">
-	<h2 class = "title"><a href="{% url 'home:edit' slug=post.slug %}">{{post.title}}</h2></a>
-		<p>{{post.content}}</p>
-		<p>created at:{{post.created_at}}</p>
+		<div class= "small-6 large-4 columns">
+			<h2 class = "title"><a href="{% url 'home:edit' slug=post.slug %}">{{post.title}}</h2></a>
+				<p>{{post.content}}</p>
+				<p>created at:{{post.created_at}}</p>
+				<p>author: {{user.username}}</p>
+		</div>
 	</div>
 
+</div>
+
+
+
+
 	{% endfor %}
+</div>
 
 {% endblock %}

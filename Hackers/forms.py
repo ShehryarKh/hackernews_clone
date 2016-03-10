@@ -9,8 +9,13 @@ class PostForm(forms.ModelForm):
 		fields = [
 			"title",
 			"content",
+			# "user",
 
 		]
+
+		# widgets = {'user': forms.HiddenInput()}
+
+
 
 class UserForm(UserCreationForm):
 	class Meta:

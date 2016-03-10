@@ -1,0 +1,22 @@
+#nav:hover{
+    background-color: yellow;
+    }
+.row{
+    border:solid black 5px;
+    border-radius: 25px
+}
+.row:hover{
+    border: 5px solid yellow;
+}
+.title:hover{
+    text-decoration: underline;
+}
+.container{
+    background-color: #E8E8E8 ;
+
+}
+
+.allposts{
+	    background-color: #E8E8E8 ;
+
+}
